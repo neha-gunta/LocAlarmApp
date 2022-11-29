@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">LocAlarm</string>
+    <string name="are_you_in_emergency">Are You in Emergency?</string>
+    <string name="shakePhone">Shake the phone 3 times to trigger texts to your emergency contacts</string>
+    <string name="contacts_page">Contacts Page</string>
+    <string name="add_emergency_contact">Add Emergency Contact</string>
+</resources>
