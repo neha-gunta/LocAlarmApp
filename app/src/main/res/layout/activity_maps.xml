@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:visibility="visible">
+
+    <!--fragment to display our maps-->
+
+    <!--search view to search our location-->
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="534dp"
+        android:layout_above="@+id/radiusSeekbar"
+        android:layout_marginBottom="24dp"
+        tools:context=".MapsActivity" />
+
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/idSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="#BFBFBF"
+        android:elevation="5dp"
+        app:iconifiedByDefault="false"
+        app:queryHint="Search Here" />
+
+    <SeekBar
+        android:id="@+id/radiusSeekbar"
+        android:layout_width="314dp"
+        android:layout_height="83dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="21dp"
+        android:max="100"
+        android:progress="2" />
+
+    <TextView
+        android:id="@+id/radius"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radiusSeekbar"
+        android:layout_alignEnd="@+id/radiusSeekbar"
+        android:layout_marginEnd="-44dp"
+        android:layout_marginBottom="-51dp"
+        android:text="10" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radius"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="-19dp"
+        android:text="m" />
+
+    <Button
+        android:id="@+id/set"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/radius"
+        android:layout_marginEnd="-27dp"
+        android:layout_marginBottom="-51dp"
+        android:layout_toStartOf="@+id/textView2"
+        android:text="set" />
+
+    <Switch
+        android:id="@+id/onEntry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radiusSeekbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="-23dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radiusSeekbar"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="155dp"
+        android:layout_marginBottom="-17dp"
+        android:text="On Entry" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radiusSeekbar"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginEnd="-15dp"
+        android:layout_marginBottom="-18dp"
+        android:layout_toStartOf="@+id/onEntry"
+        android:text="On Exit" />
+
+    <TextView
+        android:id="@+id/dist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radius"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="29dp"
+        android:layout_marginBottom="19dp"
+        android:text="TextView" />
+
+</RelativeLayout>

@@ -65,12 +65,13 @@ public class EmergencyContacts extends AppCompatActivity {
                                     phone = phones.getString(phones.getColumnIndexOrThrow("data1"));
                                 }
                                 String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-                                db.addcontact(new ContactModel(0, name, phone));
-
+                                db.addcontact(new ContactModel(0, name, phone, 1));
+                                Log.i("Hello",name + phone + "bef db call");
                                 list.add(new ContactModel(0, name, phone));
                                 list = db.getAllContacts();
                                 Log.i("Hello","Inside onclick button for adding no.");
                                 customAdapter.refresh(list);
+                                Log.i("hello", "hi");
                             } catch (Exception ex) {
                             }
                         }
@@ -172,44 +173,6 @@ public class EmergencyContacts extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        // get the contact from the PhoneBook of device
-        switch (requestCode) {
-            case (PICK_CONTACT):
-                if (resultCode == Activity.RESULT_OK) {
-
-                    Uri contactData = data.getData();
-                    Cursor c = managedQuery(contactData, null, null, null, null);
-                    if (c.moveToFirst()) {
-
-                        String id = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts._ID));
-//                        String hasPhone = c.getString(c.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                        String hasPhone = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.HAS_PHONE_NUMBER));
-                        String phone = null;
-                        try {
-                            if (hasPhone.equalsIgnoreCase("1")) {
-                                Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + " = " + id, null, null);
-                                phones.moveToFirst();
-                                phone = phones.getString(phones.getColumnIndexOrThrow("data1"));
-                            }
-                            String name = c.getString(c.getColumnIndexOrThrow(ContactsContract.Contacts.DISPLAY_NAME));
-                            db.addcontact(new ContactModel(0, name, phone));
-                            list.add(new ContactModel(0, name, phone));
-                            list = db.getAllContacts();
-
-                            customAdapter.refresh(list);
-
-                        } catch (Exception ex) {
-                        }
-                    }
-                }
-                break;
-        }
-    }
-
     private void askIgnoreOptimization() {
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
@@ -219,6 +182,6 @@ public class EmergencyContacts extends AppCompatActivity {
         }
 
     }
-    }
+}
 
 

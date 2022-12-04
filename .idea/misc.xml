@@ -3,12 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/LocAlarm/app/src/debug/res/layout/activity_maps.xml" value="0.1796875" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_add_alarm.xml" value="0.22" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_emergency_contacts.xml" value="0.1796875" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_main.xml" value="0.165625" />
+        <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_maps.xml" value="0.22" />
+        <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_ring_alarm.xml" value="0.1796875" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_settings.xml" value="0.1796875" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/activity_sos.xml" value="0.1796875" />
         <entry key="..\:/LocAlarm/app/src/main/res/layout/item_user.xml" value="0.1796875" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_about.xml" value="0.2673365275065105" />
+        <entry key="app/src/main/res/layout/activity_add_alarm.xml" value="0.146875" />
+        <entry key="app/src/main/res/layout/activity_alarms.xml" value="0.146875" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2302490234375" />
+        <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_update_alarm.xml" value="0.146875" />
+        <entry key="app/src/main/res/layout/item_alarm.xml" value="0.25" />
       </map>
     </option>
   </component>

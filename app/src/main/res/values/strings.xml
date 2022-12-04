@@ -10,4 +10,6 @@
     <string name="name">Name</string>
     <string name="enter_name_of_the_alarm">Enter name of the alarm</string>
     <string name="about">About</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_maps2">MapsActivity2</string>
 </resources>

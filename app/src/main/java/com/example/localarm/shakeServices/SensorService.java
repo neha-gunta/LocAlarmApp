@@ -124,11 +124,11 @@ public class SensorService extends Service {
 
                                 // send SMS to each contact
                                 for (ContactModel c : list) {
-                                    String message = "Hey, " + c.getName() + "I am in DANGER, i need help. Please urgently reach me out. Here are my coordinates.\n " + "http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                                    String message = "Hey, " + c.getName() + " I am in DANGER, I need help. Please urgently reach me out. Here are my coordinates.\n " + "http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
                                     smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
                                 }
                             } else {
-                                String message = "I am in DANGER, i need help. Please urgently reach me out.\n" + "GPS was turned off.Couldn't find location. Call your nearest Police Station.";
+                                String message = "I am in DANGER, I need help. Please urgently reach me out.\n" + "GPS was turned off.Couldn't find location. Call your nearest Police Station.";
                                 SmsManager smsManager = SmsManager.getDefault();
                                 DbHelper db = new DbHelper(SensorService.this);
                                 List<ContactModel> list = db.getAllContacts();

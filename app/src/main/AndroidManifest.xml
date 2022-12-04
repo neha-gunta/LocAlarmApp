@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.localarm">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -12,6 +19,13 @@
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- We also ask user to remove any battery optimization constraints during runtime -->
     <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.ACTION_MANAGE_OVERLAY_PERMISSION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -23,6 +37,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LocAlarm"
         tools:targetApi="31">
+                <activity
+                    android:name=".RingAlarm"
+                    android:exported="false"
+                    android:excludeFromRecents="true"
+                    android:showOnLockScreen="true"
+                    android:showWhenLocked="true"
+                    android:turnScreenOn="true"
+                    android:showForAllUsers="true"/>
+        <!--
+             TODO: Before you run your application, you need a Google Maps API key.
+
+             To get one, follow the directions here:
+
+                https://developers.google.com/maps/documentation/android-sdk/get-api-key
+
+             Once you have your API key (it starts with "AIza"), define a new property in your
+             project's local.properties file (e.g. MAPS_API_KEY=Aiza...), and replace the
+             "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".Settings"
             android:exported="false" />
@@ -30,14 +71,28 @@
             android:name=".AddAlarm"
             android:exported="false" />
 
+        <activity
+            android:name=".About"
+            android:exported="false" />
+
+        <activity
+            android:name=".UpdateAlarm"
+            android:exported="false" />
+
         <receiver
             android:name=".shakeServices.ReactivateService"
             android:enabled="true"
             android:exported="true" /> <!-- register the service -->
+        <receiver
+            android:name=".MyAlarm"
+            android:enabled="true"
+            android:exported="true" />
+
         <service
             android:name=".shakeServices.SensorService"
             android:enabled="true"
             android:exported="true" />
+
 
         <activity
             android:name=".EmergencyContacts"

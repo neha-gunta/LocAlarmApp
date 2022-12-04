@@ -6,8 +6,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.example.localarm.contacts.AlarmAdapter;
+import com.example.localarm.contacts.AlarmModel;
+import com.example.localarm.contacts.DbHelper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+
+    ListView listView;
+    DbHelper db;
+    List<AlarmModel> list;
+    AlarmAdapter alarmAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +37,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Button button2 = findViewById(R.id.button2);
+        listView = (ListView) findViewById(R.id.ListViewAlarms);
+        db = new DbHelper(this);
+        list = db.getAllAlarms();
+        alarmAdapter = new AlarmAdapter(this, list);
+        listView.setAdapter(alarmAdapter);
+
+        FloatingActionButton button2 = findViewById(R.id.floating_button_add);
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -40,10 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
-
-
-
-
-
 }
