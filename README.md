@@ -8,5 +8,5 @@ Features of the app:
 - Alarm on reaching or exiting a location
 - SOS text to multiple contacts in case of emergencies on
   - click of a button
-  - shaking the device
+  - shaking the device thrice
 - Notify users on reaching a location
