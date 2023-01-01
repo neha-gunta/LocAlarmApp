@@ -10,3 +10,8 @@ Features of the app:
   - click of a button
   - shaking the device thrice
 - Notify users on reaching a location
+
+Setup:
+- To build the app in android studio, clone the github repository
+- Generate an API key and store the value in local.properties
+- Run and emulate!
