@@ -19,10 +19,13 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.View;
 import android.webkit.PermissionRequest;
 import android.widget.Button;
@@ -32,6 +35,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.localarm.contacts.ContactModel;
+import com.example.localarm.contacts.DbHelper;
+import com.example.localarm.shakeServices.SensorService;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -44,7 +50,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.example.localarm.databinding.ActivityMapsBinding;
+import com.google.android.gms.tasks.CancellationToken;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnTokenCanceledListener;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionDeniedResponse;
@@ -345,6 +354,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
 
+    @SuppressLint("MissingPermission")
     private void setAlarm(boolean flag) {
         //getting the alarm manager
         AlarmManager am = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -360,6 +370,64 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //        Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
 //        MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), Settings.System.DEFAULT_RINGTONE_URI);
 //        mediaPlayer.start();
+        // create FusedLocationProviderClient to get the user location
+        FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(getApplicationContext());
+
+        // use the PRIORITY_BALANCED_POWER_ACCURACY
+        // so that the service doesn't use unnecessary power via GPS
+        // it will only use GPS at this very moment
+        fusedLocationClient.getCurrentLocation(LocationRequest.QUALITY_BALANCED_POWER_ACCURACY, new CancellationToken() {
+            @Override
+            public boolean isCancellationRequested() {
+                return false;
+            }
+
+            @NonNull
+            @Override
+            public CancellationToken onCanceledRequested(@NonNull OnTokenCanceledListener onTokenCanceledListener) {
+                return null;
+            }
+        }).addOnSuccessListener(new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                // check if location is null
+                // for both the cases we will
+                // create different messages
+                if (location != null) {
+
+                    SmsManager smsManager = SmsManager.getDefault();
+                    DbHelper db = new DbHelper(MapsActivity.this);
+                    String message = "Hey, I've safely reached the destination.  Here are my coordinates. "+"http://maps.google.com/?q=" + location.getLatitude() + "," + location.getLongitude();
+                    List<ContactModel> list = db.getAllContacts();
+                    for (ContactModel c : list) {
+                        smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                    }
+                } else {
+                    String message = "I am in DANGER, I need help. Please urgently reach me out.\n" + "GPS was turned off.Couldn't find location. Call your nearest Police Station.";
+                    SmsManager smsManager = SmsManager.getDefault();
+                    DbHelper db = new DbHelper(MapsActivity.this);
+                    List<ContactModel> list = db.getAllContacts();
+                    for (ContactModel c : list) {
+                        smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                    }
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.d("Check: ", "OnFailure");
+                String message = "I am in DANGER, i need help. Please urgently reach me out.\n" + "GPS was turned off.Couldn't find location. Call your nearest Police Station.";
+                SmsManager smsManager = SmsManager.getDefault();
+                DbHelper db = new DbHelper(MapsActivity.this);
+                List<ContactModel> list = db.getAllContacts();
+                for (ContactModel c : list) {
+                    smsManager.sendTextMessage(c.getPhoneNo(), null, message, null, null);
+                }
+            }
+        });
+
+
+
         Intent intent = new Intent(this,RingAlarm.class);
         startActivity(intent);
     }

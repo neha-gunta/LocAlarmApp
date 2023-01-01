@@ -30,7 +30,8 @@ public class Settings extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-
+        TextView tv=(TextView)findViewById(R.id.textView7);
+        tv.setText("0");
 //        Float givenbatt = Float.parseFloat(result);
 //        BroadcastReceiver mBatInfoReceiver = new BroadcastReceiver() {
 //            @Override
@@ -69,7 +70,7 @@ public class Settings extends AppCompatActivity {
                 AudioManager audioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
                 volume= audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                 maxVol=audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-                TextView tv=(TextView)findViewById(R.id.textView7);
+
                 seekBar.setMax(audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC));
                 seekBar.setProgress(audioManager.getStreamVolume(AudioManager.STREAM_MUSIC));
                 Log.i("vol",String.valueOf(maxVol));

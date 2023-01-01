@@ -17,9 +17,12 @@
         <entry key="app/src/main/res/layout/activity_add_alarm.xml" value="0.146875" />
         <entry key="app/src/main/res/layout/activity_alarms.xml" value="0.146875" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2302490234375" />
+        <entry key="app/src/main/res/layout/activity_maps.xml" value="0.16145833333333334" />
+        <entry key="app/src/main/res/layout/activity_ring_alarm.xml" value="0.16145833333333334" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_update_alarm.xml" value="0.146875" />
         <entry key="app/src/main/res/layout/item_alarm.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_user.xml" value="0.25" />
       </map>
     </option>
   </component>

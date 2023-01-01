@@ -38,6 +38,8 @@ public class AddAlarm extends AppCompatActivity {
     List<AlarmModel> list;
     private EditText name_edit, desc_edit;
 
+    Intent intent = getIntent();
+
     ActivityResultLauncher<Intent> activityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
